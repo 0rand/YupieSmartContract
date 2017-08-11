@@ -1,0 +1,574 @@
+{
+  "contract_name": "YupieToken",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "preSaleStartTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_spender",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "saleStartTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "fiftenPercentDayBonuses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxPresaleSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxTotalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalETH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tenPercentEtherBonuses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "twentyPercentEtherBonuses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YUPIE_PER_ETH_PRE_SALE",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "YUPIEToken",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "allowTransfer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YUPIE_PER_ETH_SALE",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "tenPercentDayBonuses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "preSaleEndTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "crowdholdingAddress",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "fiftenPercentEtherBonuses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "remaining",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ETHContributed",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "twentyPercentDayBonuses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "saleEndTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "contractAddress",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "_creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "_amountOfYUPIE",
+          "type": "uint256"
+        }
+      ],
+      "name": "CreatedYUPIE",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x60606040526040805190810160405260038082527f312e300000000000000000000000000000000000000000000000000000000000602083015290805161004a929160200190610070565b506005805460a060020a60ff02191690556000600655341561006b57600080fd5b610110565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100b157805160ff19168380011785556100de565b828001600101855582156100de579182015b828111156100de5782518255916020019190600101906100c3565b5b506100eb9291506100ef565b5090565b61010d91905b808211156100eb57600081556001016100f5565b5090565b90565b610cc38061011f6000396000f3006060604052361561017d5763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306d65af3811461018257806306fdde03146101a7578063095ea7b31461023257806318160ddd146102685780631cbaee2d1461028d578063203768dc146102b257806321bdb26e146102d757806323b872dd146102fc5780632ab4d05214610338578063313ce5671461035d57806336bdee7414610382578063480f89e4146103a757806354169053146103cc57806354fd4d50146103f157806362a1029c1461047c57806370a08231146104a157806395d89b41146104d257806396bf2fe11461055d5780639b08a22f14610572578063a9059cbb14610599578063b1e2e28c146105cf578063c2df641c146105f4578063cce29ea714610619578063d23855d71461063e578063d43d6e581461066d578063dd62ed3e14610692578063e227b5d1146106c9578063e29d4415146106fa578063ed338ff11461071f578063f6b4dfb414610744575b600080fd5b341561018d57600080fd5b610195610773565b60405190815260200160405180910390f35b34156101b257600080fd5b6101ba61077b565b60405160208082528190810183818151815260200191508051906020019080838360005b838110156101f75780820151818401525b6020016101de565b50505050905090810190601f1680156102245780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561023d57600080fd5b610254600160a060020a03600435166024356107b2565b604051901515815260200160405180910390f35b341561027357600080fd5b610195610859565b60405190815260200160405180910390f35b341561029857600080fd5b61019561085f565b60405190815260200160405180910390f35b34156102bd57600080fd5b610195610867565b60405190815260200160405180910390f35b34156102e257600080fd5b61019561086e565b60405190815260200160405180910390f35b341561030757600080fd5b610254600160a060020a036004358116906024351660443561087c565b604051901515815260200160405180910390f35b341561034357600080fd5b610195610991565b60405190815260200160405180910390f35b341561036857600080fd5b610195610999565b60405190815260200160405180910390f35b341561038d57600080fd5b61019561099e565b60405190815260200160405180910390f35b34156103b257600080fd5b6101956109a4565b60405190815260200160405180910390f35b34156103d757600080fd5b6101956109a9565b60405190815260200160405180910390f35b34156103fc57600080fd5b6101ba6109ae565b60405160208082528190810183818151815260200191508051906020019080838360005b838110156101f75780820151818401525b6020016101de565b50505050905090810190601f1680156102245780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561048757600080fd5b610195610a4c565b60405190815260200160405180910390f35b34156104ac57600080fd5b610195600160a060020a0360043516610a52565b60405190815260200160405180910390f35b34156104dd57600080fd5b6101ba610a71565b60405160208082528190810183818151815260200191508051906020019080838360005b838110156101f75780820151818401525b6020016101de565b50505050905090810190601f1680156102245780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561056857600080fd5b610570610aa8565b005b341561057d57600080fd5b610254610b01565b604051901515815260200160405180910390f35b34156105a457600080fd5b610254600160a060020a0360043516602435610b22565b604051901515815260200160405180910390f35b34156105da57600080fd5b610195610be2565b60405190815260200160405180910390f35b34156105ff57600080fd5b610195610be8565b60405190815260200160405180910390f35b341561062457600080fd5b610195610bef565b60405190815260200160405180910390f35b341561064957600080fd5b610651610bf7565b604051600160a060020a03909116815260200160405180910390f35b341561067857600080fd5b610195610c06565b60405190815260200160405180910390f35b341561069d57600080fd5b610195600160a060020a0360043581169060243516610c0b565b60405190815260200160405180910390f35b34156106d457600080fd5b610195600160a060020a0360043516610c38565b60405190815260200160405180910390f35b341561070557600080fd5b610195610c4a565b60405190815260200160405180910390f35b341561072a57600080fd5b610195610c4f565b60405190815260200160405180910390f35b341561074f57600080fd5b610651610c57565b604051600160a060020a03909116815260200160405180910390f35b635992aa0081565b60408051908101604052600581527f5955504945000000000000000000000000000000000000000000000000000000602082015281565b60008115806107e45750600160a060020a03338116600090815260026020908152604080832093871683529290522054155b15156107ef57600080fd5b600160a060020a03338116600081815260026020908152604080832094881680845294909152908190208590557f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b9259085905190815260200160405180910390a35060015b92915050565b60005481565b6359f97f0081565b620fd20081565b6103e864012ce25e005b0481565b600160a060020a0380841660009081526002602090815260408083203385168452825280832054938616835260019091528120549091906108c3908463ffffffff610c6616565b600160a060020a0380861660009081526001602052604080822093909355908716815220546108f8908463ffffffff610c8016565b600160a060020a038616600090815260016020526040902055610921818463ffffffff610c8016565b600160a060020a03808716600081815260026020908152604080832033861684529091529081902093909355908616917fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9086905190815260200160405180910390a3600191505b509392505050565b63259c4bc081565b601281565b60065481565b600581565b603281565b60038054600181600116156101000203166002900480601f016020809104026020016040519081016040528092919081815260200182805460018160011615610100020316600290048015610a445780601f10610a1957610100808354040283529160200191610a44565b820191906000526020600020905b815481529060010190602001808311610a2757829003601f168201915b505050505081565b610bb881565b600160a060020a0381166000908152600160205260409020545b919050565b60408051908101604052600381527f5955500000000000000000000000000000000000000000000000000000000000602082015281565b600454600160a060020a03161515610abf57600080fd5b600554600160a060020a03161515610ad657600080fd5b6004805473ffffffffffffffffffffffffffffffffffffffff191633600160a060020a03161790555b565b60055474010000000000000000000000000000000000000000900460ff1681565b600160a060020a033316600090815260016020526040812054610b4b908363ffffffff610c8016565b600160a060020a033381166000908152600160205260408082209390935590851681522054610b80908363ffffffff610c6616565b600160a060020a0380851660008181526001602052604090819020939093559133909116907fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9085905190815260200160405180910390a35060015b92915050565b6103e881565b621fa40081565b6359beb82081565b600554600160a060020a031681565b601881565b600160a060020a038083166000908152600260209081526040808320938516835292905220545b92915050565b60076020526000908152604090205481565b600081565b635a210c0081565b600454600160a060020a031681565b600082820183811015610c7557fe5b8091505b5092915050565b600082821115610c8c57fe5b508082035b929150505600a165627a7a72305820161d927e72e3f95833b08845d89a67397e65b8cb994467fd6b083f448dbbd6a00029",
+  "networks": {
+    "1502495060039": {
+      "events": {
+        "0x6f5f7ba2c9083537caa4ef3d118c503788abb0b2d5f97f9bb78530d2f9a614ae": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_creator",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amountOfYUPIE",
+              "type": "uint256"
+            }
+          ],
+          "name": "CreatedYUPIE",
+          "type": "event"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x707fdbe4cb8b28ddaac7689472392e86ea482120",
+      "updated_at": 1502495094691
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1502495094691
+}
