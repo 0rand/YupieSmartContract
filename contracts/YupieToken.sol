@@ -40,7 +40,7 @@ contract YupieToken is StandardToken {
 	address public crowdholdingAddress;	  									// Crowdholding's wallet
 
 	// STATE INFO	
-	bool public allowTransfer = false;										// Flag to change if transfering is allowed
+	bool public allowInvestment = false;										// Flag to change if transfering is allowed
 	uint256 public totalETH = 0; 											// Total Ethereum Contributed
 	mapping (address => uint256) public ETHContributed; 					// Total Ethereum Per Account
 
@@ -77,132 +77,65 @@ contract YupieToken is StandardToken {
 	// INVESTMENT FUNCTION
 	function investment() payable external {
 
+		require(allowInvestment);
+
 		// The amount of ether must be greater than 0
 		require(msg.value > 0);
 
-
-		// Calculate the new ether balance after investment
-		uint256 _newEtherBalance = totalETH.add(msg.value);
-		
-
-		// CHECK PRESALE AND SALE DATES
-		uint256 _conversionRate;
-		uint256 _saleStartTime;		
-		if (block.timestamp > preSaleStartTime && block.timestamp < preSaleEndTime) {
-		
-			// Pre-sale flag must be valid
-			require(!preSaleHasEnded);
-			require(_newEtherBalance > preSaleMaxPurchase);
-
-			_conversionRate = YUPIE_PER_ETH_PRE_SALE;
-			_saleStartTime = preSaleStartTime;
-		} else if (block.timestamp > saleStartTime && block.timestamp < saleEndTime) {
-			if (saleHasEnded) throw;
-
-			_conversionRate = YUPIE_PER_ETH_SALE;
-			_saleStartTime = saleStartTime;
-		} else {
-			throw;
-		}
-
+		// Investment must be during pre-sale
+		require(block.timestamp > preSaleStartTime && block.timestamp < preSaleEndTime);
 
 		// CALCULATE TRANSFER AMOUNTS
-		uint256 amountOfYUPIE = msg.value.mul(_conversionRate);
-
+		uint256 amountOfYUPIE = msg.value.mul(YUPIE_PER_ETH_PRE_SALE);
 
 		// APPLY BONUSES
-		// ETHER BONUS
 		if (msg.value > twentyPercentEtherBonuses) {
-			amountOfYUPIE = amountOfYUPIE.mul(1.2);
+			amountOfYUPIE = amountOfYUPIE*12/10;
 		} else if (msg.value > fiftenPercentEtherBonuses) {
-			amountOfYUPIE = amountOfYUPIE.mul(1.15);
+			amountOfYUPIE = amountOfYUPIE*115/100;
 		} else if (msg.value > tenPercentEtherBonuses) {
-			amountOfYUPIE = amountOfYUPIE.mul(1.1);
+			amountOfYUPIE = amountOfYUPIE*11/10;
 		}
-		// TIME BONUS
-		if (block.timestamp > (_saleStartTime + tenPercentDayBonuses)) {
-			amountOfYUPIE = amountOfYUPIE.mul(1.1);
-		} else if (block.timestamp > (_saleStartTime + fiftenPercentDayBonuses)) {
-			amountOfYUPIE = amountOfYUPIE.mul(1.15);
+		if (block.timestamp > (preSaleStartTime + tenPercentDayBonuses)) {
+			amountOfYUPIE = amountOfYUPIE*11/10;
+		} else if (block.timestamp > (preSaleStartTime + fiftenPercentDayBonuses)) {
+			amountOfYUPIE = amountOfYUPIE*115/100;
 		} else {
-			amountOfYUPIE = amountOfYUPIE.mul(1.2);
+			amountOfYUPIE = amountOfYUPIE*12/10;
 		}
-
-
-		// TODO: CALCULATE BUY AMOUNT RESTRICTIONS
-		
-
 
 		// CALCULATE BALANCES
 		uint256 totalSupplySafe = totalSupply.add(amountOfYUPIE);
 		uint256 balanceSafe = balances[msg.sender].add(amountOfYUPIE);
 		uint256 contributedSafe = ETHContributed[msg.sender].add(msg.value);
 
-
 		// UPDATE BALANCES
 		totalSupply = totalSupplySafe;
 		balances[msg.sender] = balanceSafe;
-		totalETH = _newEtherBalance;
+		totalETH = totalETH.add(msg.value);
 		ETHContributed[msg.sender] = contributedSafe;
 
+		// CHECK VALUES
+		assert(totalSupplySafe > 0);
+		assert(balanceSafe > 0);
+		assert(contributedSafe > 0);
 
 		// TRANSFER BALANCE DURING PRE-SALE
-		if (!preSaleHasEnded) teamETHAddress.transfer(msg.value);
-
-
+		crowdholdingAddress.transfer(msg.value);
 
 		// CREATE EVENT FOR SENDER
 		CreatedYUPIE(msg.sender, amountOfYUPIE);
 	}
 	
-
-	// UPDATE STATE FUNCTIONS
-	function endPreSale() {
-		// Do not end an already ended sale
-		if (preSaleHasEnded) throw;
-		
-		// Only allow the owner
-		if (msg.sender != contractAddress) throw;
-		
-		preSaleHasEnded = true;
-	}
-	function endSale() {
-		
-		
-	}
-	
 	
 	// CHANGE PARAMETERS METHODS
-	function changeTeamETHAddress(address _newAddress) {
-		if (msg.sender != contractAddress) throw;
-		teamETHAddress = _newAddress;
+	function changeCrowdholdingAddress(address _newAddress) {
+		require(msg.sender == contractAddress);
+		crowdholdingAddress = _newAddress;
 	}	
-	function changeAllowTransfer(bool _allowTransfer) {
-		if (msg.sender != contractAddress) throw;
-		allowTransfer = _allowTransfer;
-	}
-	function changeSaleStartTime(uint256 _saleStartTime) {
-		if (msg.sender != contractAddress) throw;
-        saleStartTime = _saleStartTime;
-	}	
-	function changeSaleEndBlock(uint256 _saleEndTime) {
-		if (msg.sender != contractAddress) throw;
-        saleEndTime = _saleEndTime;
-	}
-	
-	
-	// TRANSFER METHODS
-	function transfer(address _to, uint _value) {
-		// Cannot transfer unless the minimum cap is hit
-		if (!allowTransfer) throw;
-		
-		super.transfer(_to, _value);
-	}	
-	function transferFrom(address _from, address _to, uint _value) {
-		// Cannot transfer unless the minimum cap is hit
-		if (!allowTransfer) throw;
-		
-		super.transferFrom(_from, _to, _value);
+	function changeAllowInvestment(bool _allowInvestment) {
+		require(msg.sender == contractAddress);
+		allowInvestment = _allowInvestment;
 	}
 
 }
