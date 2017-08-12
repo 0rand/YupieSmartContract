@@ -40,7 +40,7 @@ contract YupieToken is StandardToken {
 	address public crowdholdingAddress;	  									// Crowdholding's wallet
 
 	// STATE INFO	
-	bool public allowInvestment = false;										// Flag to change if transfering is allowed
+	bool public allowInvestment = false;									// Flag to change if transfering is allowed
 	uint256 public totalETH = 0; 											// Total Ethereum Contributed
 	mapping (address => uint256) public ETHContributed; 					// Total Ethereum Per Account
 
@@ -60,22 +60,6 @@ contract YupieToken is StandardToken {
 
 	// FALL BACK FUNCTION TO ALLOW ETHER DONATIONS
 	function() payable {
-		// This function is called “fallback function” and it is called when someone just sent Ether to the contract without providing any data or if someone messed up the types so that they tried to call a function that does not exist.
-
-		// The default behaviour (if no fallback function is explicitly given) in these situations is to throw an exception.
-
-		// If the contract is meant to receive Ether with simple transfers, you should implement the fallback function as
-
-		// function() payable { }
-
-		// Another use of the fallback function is to e.g. register that your contract received ether by using an event.
-
-		// Attention: If you implement the fallback function take care that it uses as little gas as possible, because send() will only supply a limited amount.
-	}
-	
-
-	// INVESTMENT FUNCTION
-	function investment() payable external {
 
 		require(allowInvestment);
 
