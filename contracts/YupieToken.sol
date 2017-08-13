@@ -1,7 +1,9 @@
-pragma solidity ^0.4.4;
+pragma solidity ^0.4.11;
 import 'zeppelin-solidity/contracts/token/StandardToken.sol';
+import 'zeppelin-solidity/contracts/math/SafeMath.sol';
 
 contract YupieToken is StandardToken {
+	using SafeMath for uint256;
 
     // EVENTS
     event CreatedYUPIE(address indexed _creator, uint256 _amountOfYUPIE);
@@ -18,7 +20,7 @@ contract YupieToken is StandardToken {
 	uint256 public constant maxPresaleSupply = maxTotalSupply*8/1000; 			// MAX TOTAL DURING PRESALE (0.8% of MAXTOTALSUPPLY)
 
 	// PURCHASE DATES
-	uint256 public constant preSaleStartTime = 1502784000; 						// GMT: Tuesday, August 15, 2017 8:00:00 AM
+	uint256 public constant preSaleStartTime = 0; //1502784000; 						// GMT: Tuesday, August 15, 2017 8:00:00 AM
 	uint256 public constant preSaleEndTime = 1505671200; 						// GMT: Sunday, September 17, 2017 6:00:00 PM
 	uint256 public constant saleStartTime = 1509523200; 						// GMT: Wednesday, November 1, 2017 8:00:00 AM
 	uint256 public constant saleEndTime = 1512115200; 							// GMT: Friday, December 1, 2017 8:00:00 AM
@@ -32,12 +34,12 @@ contract YupieToken is StandardToken {
 	uint256 public constant tenPercentDayBonuses = 2073600;						// 24+ Days
 
 	// PRICING INFO
-	uint256 public constant YUPIE_PER_WEI_PRE_SALE = 3000 * 1 ether;  			// 3000 YUPIE = 1 ETH
-	uint256 public constant YUPIE_PER_WEI_SALE = 1000 * 1 ether;  				// 1000 YUPIE = 1 ETH
+	uint256 public constant YUPIE_PER_ETH_PRE_SALE = 3000;  			// 3000 YUPIE = 1 ETH
+	uint256 public constant YUPIE_PER_ETH_SALE = 1000;  				// 1000 YUPIE = 1 ETH
 	
 	// ADDRESSES
 	address public contractAddress; 											// This contracts address
-	address public crowdholdingAddress = 0x616263;	  										// Crowdholding's wallet
+	address public crowdholdingAddress = 0x616263;	  							// Crowdholding's wallet
 
 	// STATE INFO	
 	bool public allowInvestment = true;											// Flag to change if transfering is allowed
@@ -76,13 +78,13 @@ contract YupieToken is StandardToken {
 		// Investment periods
 		if (block.timestamp > preSaleStartTime && block.timestamp < preSaleEndTime) {
 			// Pre-sale ICO
-			amountOfYUPIE = amountOfWei.mul(YUPIE_PER_WEI_PRE_SALE);
+			amountOfYUPIE = amountOfWei.mul(YUPIE_PER_ETH_PRE_SALE);
 			tenPercentBonusTime = preSaleStartTime + tenPercentDayBonuses;
 			fifteenPercentBonusTime = preSaleStartTime + fifteenPercentDayBonuses;
 			totalYUPIEAvailable = maxPresaleSupply - totalYUPIESAllocated;
 		} else if (block.timestamp > saleStartTime && block.timestamp < saleEndTime) {
 			// ICO
-			amountOfYUPIE = amountOfWei.mul(YUPIE_PER_WEI_SALE);
+			amountOfYUPIE = amountOfWei.mul(YUPIE_PER_ETH_SALE);
 			tenPercentBonusTime = saleStartTime + tenPercentDayBonuses;
 			fifteenPercentBonusTime = saleStartTime + fifteenPercentDayBonuses;
 			totalYUPIEAvailable = maxTotalSupply - totalYUPIESAllocated;
@@ -96,18 +98,18 @@ contract YupieToken is StandardToken {
 
 		// Apply Bonuses
 		if (amountOfWei > twentyPercentEtherBonuses) {
-			amountOfYUPIE = amountOfYUPIE*12/10;
+			amountOfYUPIE = amountOfYUPIE.mul(12).div(10);
 		} else if (amountOfWei > fiftenPercentEtherBonuses) {
-			amountOfYUPIE = amountOfYUPIE*115/100;
+			amountOfYUPIE = amountOfYUPIE.mul(115).div(100);
 		} else if (amountOfWei > tenPercentEtherBonuses) {
-			amountOfYUPIE = amountOfYUPIE*11/10;
+			amountOfYUPIE = amountOfYUPIE.mul(11).div(10);
 		}
 		if (block.timestamp > (tenPercentBonusTime)) {
-			amountOfYUPIE = amountOfYUPIE*11/10;
+			amountOfYUPIE = amountOfYUPIE.mul(11).div(10);
 		} else if (block.timestamp > (fifteenPercentBonusTime)) {
-			amountOfYUPIE = amountOfYUPIE*115/100;
+			amountOfYUPIE = amountOfYUPIE.mul(115).div(100);
 		} else {
-			amountOfYUPIE = amountOfYUPIE*12/10;
+			amountOfYUPIE = amountOfYUPIE.mul(12).div(10);
 		}
 
 		// Max sure it doesn't exceed remaining supply

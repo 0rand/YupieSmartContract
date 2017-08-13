@@ -1,11 +1,16 @@
 var YupieToken = artifacts.require("YupieToken");
 
 contract('YupieToken', function(accounts) {
-  it("should put 10000 YupieToken in the first account", function() {
+  it("should initialize with 631 million YUPIES", function() {
     return YupieToken.deployed().then(function(instance) {
-      return instance.getBalance.call(accounts[0]);
+      // console.log('initialize')
+      // console.log(accounts);
+      // console.log(web3);
+      return instance.maxTotalSupply.call();
     }).then(function(balance) {
-      assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
+      // console.log('returned')
+      // console.log(balance.valueOf())
+      assert.equal(balance.valueOf(), 6.31e+26, "6.31e+26 wasn't in the first account");
     });
   });
   it("should send coin correctly", function() {
@@ -24,23 +29,19 @@ contract('YupieToken', function(accounts) {
 
     return YupieToken.deployed().then(function(instance) {
       yupie = instance;
-      return yupie.getBalance.call(account_one);
+      return yupie.totalYUPIESAllocated();
+    }).then(function(totalYupies) {
+      assert.equal(totalYupies.toString(), '0', 'Was not zero balance');
+      console.log(totalYupies.toString())
+      return yupie.sendTransaction({from:account_one,value:5});
     }).then(function(balance) {
-      account_one_starting_balance = balance.toNumber();
-      return yupie.getBalance.call(account_two);
-    }).then(function(balance) {
-      account_two_starting_balance = balance.toNumber();
-      return yupie.sendCoin(account_two, amount, {from: account_one});
-    }).then(function() {
-      return yupie.getBalance.call(account_one);
-    }).then(function(balance) {
-      account_one_ending_balance = balance.toNumber();
-      return yupie.getBalance.call(account_two);
-    }).then(function(balance) {
-      account_two_ending_balance = balance.toNumber();
-
-      assert.equal(account_one_ending_balance, account_one_starting_balance - amount, "Amount wasn't correctly taken from the sender");
-      assert.equal(account_two_ending_balance, account_two_starting_balance + amount, "Amount wasn't correctly sent to the receiver");
+      return yupie.totalWEIInvested();
+    }).then(function(totalWei) {
+      assert.equal(totalWei.toString(), '5', 'Total wei was not 5');
+      return yupie.totalYUPIESAllocated();
+    }).then(function(totalYupies) {
+      console.log(totalYupies.toString())
+      assert.equal(totalYupies.toString(), '16500', 'Was not zero balance');
     });
   });
 });
