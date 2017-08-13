@@ -47,7 +47,7 @@ contract YupieToken is StandardToken {
 
 
 	// INITIALIZATIONS FUNCTION
-	function YUPIEToken() {
+	function YupieToken() {
 		
 		// CHECK VALID ADDRESSES
 		require(contractAddress != address(0x0));
