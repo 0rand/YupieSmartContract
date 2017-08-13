@@ -37,7 +37,7 @@ contract YupieToken is StandardToken {
 	
 	// ADDRESSES
 	address public contractAddress; 											// This contracts address
-	address public crowdholdingAddress;	  										// Crowdholding's wallet
+	address public crowdholdingAddress = 0x616263;	  										// Crowdholding's wallet
 
 	// STATE INFO	
 	bool public allowInvestment = true;											// Flag to change if transfering is allowed
@@ -48,13 +48,13 @@ contract YupieToken is StandardToken {
 
 	// INITIALIZATIONS FUNCTION
 	function YupieToken() {
+
+		// Set Initial State
+		contractAddress = msg.sender;
 		
 		// CHECK VALID ADDRESSES
 		require(contractAddress != address(0x0));
 		require(crowdholdingAddress != address(0x0));
-
-		// Set Initial State
-		contractAddress = msg.sender;
 
 	}
 
