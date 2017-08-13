@@ -20,7 +20,7 @@ contract YupieToken is StandardToken {
 	uint256 public constant maxPresaleSupply = maxTotalSupply*8/1000; 			// MAX TOTAL DURING PRESALE (0.8% of MAXTOTALSUPPLY)
 
 	// PURCHASE DATES
-	uint256 public constant preSaleStartTime = 0; //1502784000; 						// GMT: Tuesday, August 15, 2017 8:00:00 AM
+	uint256 public constant preSaleStartTime = 0; //1502784000; 				// GMT: Tuesday, August 15, 2017 8:00:00 AM
 	uint256 public constant preSaleEndTime = 1505671200; 						// GMT: Sunday, September 17, 2017 6:00:00 PM
 	uint256 public constant saleStartTime = 1509523200; 						// GMT: Wednesday, November 1, 2017 8:00:00 AM
 	uint256 public constant saleEndTime = 1512115200; 							// GMT: Friday, December 1, 2017 8:00:00 AM
@@ -34,12 +34,12 @@ contract YupieToken is StandardToken {
 	uint256 public constant tenPercentDayBonuses = 2073600;						// 24+ Days
 
 	// PRICING INFO
-	uint256 public constant YUPIE_PER_ETH_PRE_SALE = 3000;  			// 3000 YUPIE = 1 ETH
-	uint256 public constant YUPIE_PER_ETH_SALE = 1000;  				// 1000 YUPIE = 1 ETH
+	uint256 public constant YUPIE_PER_ETH_PRE_SALE = 3000;  					// 3000 YUPIE = 1 ETH
+	uint256 public constant YUPIE_PER_ETH_SALE = 1000;  						// 1000 YUPIE = 1 ETH
 	
 	// ADDRESSES
-	address public contractAddress; 											// This contracts address
-	address public crowdholdingAddress = 0x616263;	  							// Crowdholding's wallet
+	address public constant ownerAddress = 0x616263; 							// This contracts address
+	address public constant crowdholdingAddress = 0x616263;	  					// Crowdholding's wallet
 
 	// STATE INFO	
 	bool public allowInvestment = true;											// Flag to change if transfering is allowed
@@ -50,12 +50,9 @@ contract YupieToken is StandardToken {
 
 	// INITIALIZATIONS FUNCTION
 	function YupieToken() {
-
-		// Set Initial State
-		contractAddress = msg.sender;
 		
 		// CHECK VALID ADDRESSES
-		require(contractAddress != address(0x0));
+		require(ownerAddress != address(0x0));
 		require(crowdholdingAddress != address(0x0));
 
 	}
@@ -135,21 +132,18 @@ contract YupieToken is StandardToken {
 		assert(totalWEIInvested > 0);
 		assert(contributedSafe > 0);
 
-		// TRANSFER BALANCE DURING PRE-SALE
-		crowdholdingAddress.transfer(msg.value);
-
 		// CREATE EVENT FOR SENDER
 		CreatedYUPIE(msg.sender, amountOfYUPIE);
 	}
 	
 	
 	// CHANGE PARAMETERS METHODS
-	function changeCrowdholdingAddress(address _newAddress) {
-		require(msg.sender == contractAddress);
-		crowdholdingAddress = _newAddress;
+	function transferEther(address addressToSendTo, uint256 value) {
+		require(msg.sender == ownerAddress);
+		addressToSendTo.transfer(value);
 	}	
 	function changeAllowInvestment(bool _allowInvestment) {
-		require(msg.sender == contractAddress);
+		require(msg.sender == ownerAddress);
 		allowInvestment = _allowInvestment;
 	}
 
