@@ -2,6 +2,7 @@ var YupieToken = artifacts.require("YupieToken");
 
 contract('YupieToken', function(accounts) {
   var yupie;
+  console.log(accounts)
   it("should initialize with 631 million YUPIES", function() {
     return YupieToken.deployed().then(function(instance) {
       yupie = instance;
